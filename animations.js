@@ -33,11 +33,14 @@ export const boneKey = (name) => (name === 'Bip01' ? 'Root' : name.replace(/ /g,
 export function buildRig(root) {
   root.updateMatrixWorld(true);
   const list = [];
+  // 'Bip01' (the skeleton root) is not listed as a skin joint in these GLBs, so three.js loads it as a plain
+  // Object3D rather than a Bone. Match rig nodes by name as well as by type.
+  const isRig = (o) => o && (o.isBone || /^Bip01/.test(o.name));
   root.traverse((o) => {
-    if (!o.isBone) return;
+    if (!isRig(o)) return;
     list.push({
       key: boneKey(o.name), name: o.name,
-      parentKey: o.parent && o.parent.isBone ? boneKey(o.parent.name) : null,
+      parentKey: isRig(o.parent) ? boneKey(o.parent.name) : null,
       q0: o.quaternion.clone(), Qw: o.getWorldQuaternion(new Quaternion()), pos: o.position.clone(),
     });
   });
