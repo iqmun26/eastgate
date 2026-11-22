@@ -29,7 +29,7 @@ function measureFit(scene, targetHeight) {
 }
 
 export class CharacterLibrary {
-  constructor(basePath = './assets/characters/') {
+  constructor(basePath = './') {
     this.loader = new GLTFLoader();
     this.loader.setMeshoptDecoder(MeshoptDecoder); // GLBs use EXT_meshopt_compression
     this.base = basePath; this.protos = {};

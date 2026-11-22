@@ -65,7 +65,7 @@ const audio = new AudioSys();
 
 // ---------------------------------------------------------------- world + models
 const city = buildCity(scene);
-const lib = new CharacterLibrary('./assets/characters/');
+const lib = new CharacterLibrary('./');
 let selected = 0, previewCh = null, previewAngle = 0;
 let appMode = 'loading';                 // loading | menu | play
 let gm = 'free';                         // story | free
